@@ -52,35 +52,32 @@ export const queries = {
 
     const { logisticsInfo } = await checkout.simulation(requestBody)
 
-    const sellerLogisticsInfo = item?.sellers.map((seller, index) => {
-      return {
-        seller,
-        logisticsInfo: logisticsInfo[index],
-      }
-    })
-
     try {
-      const masterDataPriorityRules = await masterdata.searchDocuments({
+      const [{ locale, sellersRanking }] = (await masterdata.searchDocuments({
         dataEntity: 'SR',
-        fields: ['ruleName', 'priority'],
+        fields: ['locale', 'sellersRanking'],
+        where: `locale=${country}`,
         pagination: {
           page: 1,
           pageSize: 50,
         },
-      })
+      })) as any
 
-      masterDataPriorityRules.forEach(({ ruleName, priority }: any) => {
-        if (ruleName.includes('farmina') && priority === 10) {
-          return sellerLogisticsInfo?.sort((a, b) => {
-            return a.seller.sellerName.localeCompare(b.seller.sellerName)
-          })
+      const sellerLogisticsInfo = item?.sellers.map((seller, index) => {
+        return {
+          seller,
+          ranking:
+            sellersRanking.find((sr: any) => sr.sellerId === seller.sellerId)
+              ?.sellerPriority ?? index + 1,
+          logisticsInfo: logisticsInfo[index],
         }
-
-        return sellerLogisticsInfo?.sort(
-          (a, b) =>
-            a.seller.commertialOffer.Price - b.seller.commertialOffer.Price
-        )
       })
+
+      if (locale === country && sellersRanking) {
+        sellerLogisticsInfo?.sort((a, b) => {
+          return a.ranking - b.ranking
+        })
+      }
 
       return { sellers: sellerLogisticsInfo?.map((sli) => sli.seller.sellerId) }
     } catch (error) {
