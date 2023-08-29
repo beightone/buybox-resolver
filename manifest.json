@@ -7,7 +7,7 @@
   "categories": [],
   "dependencies": {
     "vtex.catalog-api-proxy": "0.x",
-    "vtex.buybox-graphql": "0.x"
+    "farmina.buybox-graphql": "0.x"
   },
   "builders": {
     "node": "6.x",
