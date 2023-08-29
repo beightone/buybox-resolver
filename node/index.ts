@@ -1,6 +1,6 @@
 import type { Cached, RecorderState } from '@vtex/api'
 import { LRUCache, Service } from '@vtex/api'
-import schema from 'vtex.buybox-graphql/graphql'
+import schema from 'farmina.buybox-graphql/graphql'
 
 import { Clients } from './clients'
 import { schemaDirectives } from './directives'
