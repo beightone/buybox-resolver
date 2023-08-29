@@ -1,7 +1,7 @@
 {
   "name": "buybox-resolver",
   "vendor": "farmina",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "title": "GraphQL resolver for the VTEX store APIs",
   "description": "GraphQL resolvers for the VTEX API for the buybox.",
   "categories": [],
