@@ -17,7 +17,6 @@
     "@types/ramda": "types/npm-ramda#dist",
     "@vtex/api": "6.45.19",
     "@vtex/tsconfig": "^0.5.6",
-    "farmina.buybox-resolver": "https://far211--farmina.myvtex.com/_v/private/typings/linked/v1/farmina.buybox-resolver@0.0.0+build1692299925/public/_types/react",
     "typescript": "3.9.7",
     "vtex.buybox-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.buybox-graphql@0.2.0/public/@types/vtex.buybox-graphql",
     "vtex.catalog-api-proxy": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.catalog-api-proxy@0.10.4/public/_types/react"
