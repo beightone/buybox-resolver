@@ -695,9 +695,9 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-"farmina.buybox-graphql@http://farmina.vtexassets.com/_v/public/typings/v1/farmina.buybox-graphql@0.0.0/public/@types/farmina.buybox-graphql":
+"farmina.buybox-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.buybox-graphql@0.1.0/public":
   version "0.0.0"
-  resolved "http://farmina.vtexassets.com/_v/public/typings/v1/farmina.buybox-graphql@0.0.0/public/@types/farmina.buybox-graphql#30bd96f241e7e89380fc87893ab187deb031d960"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.buybox-graphql@0.1.0/public#56ddbc568dedea8faa76005ddea9e2f4257ae94d"
 
 fast-json-stable-stringify@^2.0.0:
   version "2.1.0"
@@ -1581,10 +1581,6 @@ vary@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
-
-"vtex.buybox-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.buybox-graphql@0.1.0/public":
-  version "0.0.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.buybox-graphql@0.1.0/public#56ddbc568dedea8faa76005ddea9e2f4257ae94d"
 
 "vtex.catalog-api-proxy@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.catalog-api-proxy@0.10.4/public/_types/react":
   version "0.0.0"
