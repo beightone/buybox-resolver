@@ -11,11 +11,10 @@ interface ProductArgs {
 export const queries = {
   sortSellers: async (_: unknown, rawArgs: ProductArgs, ctx: Context) => {
     const {
-      clients: { search, checkout },
+      clients: { search, checkout, masterdata },
       vtex: { segment },
     } = ctx
 
-    console.log('oi')
     const { skuId, country, postalCode } = rawArgs
     const salesChannel = rawArgs.salesChannel ?? segment?.channel
 
@@ -53,17 +52,38 @@ export const queries = {
 
     const { logisticsInfo } = await checkout.simulation(requestBody)
 
-    const sellerLogisticsInfo = item?.sellers.map((seller, index) => {
-      return {
-        seller,
-        logisticsInfo: logisticsInfo[index],
+    try {
+      const [{ locale, sellersRanking }] = (await masterdata.searchDocuments({
+        dataEntity: 'SR',
+        fields: ['locale', 'sellersRanking'],
+        where: `locale=${country}`,
+        pagination: {
+          page: 1,
+          pageSize: 50,
+        },
+      })) as any
+
+      const sellerLogisticsInfo = item?.sellers.map((seller, index) => {
+        return {
+          seller,
+          ranking:
+            sellersRanking.find((sr: any) => sr.sellerId === seller.sellerId)
+              ?.sellerPriority ?? index + 1,
+          logisticsInfo: logisticsInfo[index],
+        }
+      })
+
+      if (locale === country && sellersRanking) {
+        sellerLogisticsInfo?.sort((a, b) => {
+          return a.ranking - b.ranking
+        })
       }
-    })
 
-    sellerLogisticsInfo?.sort(
-      (a, b) => a.seller.commertialOffer.Price - b.seller.commertialOffer.Price
-    )
+      return { sellers: sellerLogisticsInfo?.map((sli) => sli.seller.sellerId) }
+    } catch (error) {
+      console.error(error)
+    }
 
-    return { sellers: sellerLogisticsInfo?.map((sli) => sli.seller.sellerId) }
+    return { sellers: [] }
   },
 }
